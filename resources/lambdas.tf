@@ -24,7 +24,7 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
 
 data "archive_file" "catalog" {
   type        = "zip"
-  source_file = "${path.module}/lambdas/catalog.py"
+  source_file = "${path.module}/../project/catalog.py"
   output_path = "${path.module}/build/catalog.zip"
 }
 
@@ -50,7 +50,7 @@ resource "aws_lambda_function" "catalog" {
 
 data "archive_file" "orders" {
   type        = "zip"
-  source_file = "${path.module}/lambdas/orders.py"
+  source_file = "${path.module}/../project/orders.py"
   output_path = "${path.module}/build/orders.zip"
 }
 
@@ -76,7 +76,7 @@ resource "aws_lambda_function" "orders" {
 
 data "archive_file" "checkout" {
   type        = "zip"
-  source_file = "${path.module}/lambdas/checkout.py"
+  source_file = "${path.module}/../project/checkout.py"
   output_path = "${path.module}/build/checkout.zip"
 }
 

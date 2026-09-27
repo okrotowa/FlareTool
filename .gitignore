@@ -1,6 +1,6 @@
 .terraform/
 *.tfstate
 *.tfstate.backup
-stack/build/
+resources/build/
 terraform.tfvars
 __pycache__/

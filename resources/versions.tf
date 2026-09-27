@@ -1,7 +1,7 @@
 terraform {
   required_version = ">= 1.16"
 
-  # Replace the bucket name with the `state_bucket` output from bootstrap/.
+  # Replace the bucket name with the `state_bucket` output from resources/bootstrap/.
   backend "s3" {
     bucket       = "tfpulse-demo-state-REPLACE_WITH_ACCOUNT_ID"
     key          = "demo/terraform.tfstate"

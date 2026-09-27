@@ -1,5 +1,5 @@
 # Background traffic: invokes each Lambda once a minute so CloudWatch always has data.
-# Use scripts/traffic.py for bursts right before the demo.
+# Use project/traffic.py for bursts right before the demo.
 
 resource "aws_cloudwatch_event_rule" "traffic" {
   name                = "tfpulse-demo-traffic"

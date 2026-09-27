@@ -1,9 +1,9 @@
 """Burst traffic for the demo Lambdas, so metrics react quickly.
 
 Usage:
-    python scripts/traffic.py                 # 50 calls per function
-    python scripts/traffic.py --count 200
-    python scripts/traffic.py --only checkout
+    python project/traffic.py                 # 50 calls per function
+    python project/traffic.py --count 200
+    python project/traffic.py --only checkout
 
 Requires: pip install boto3, and AWS credentials allowed to invoke the functions.
 """
