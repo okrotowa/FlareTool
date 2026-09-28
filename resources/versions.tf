@@ -3,7 +3,7 @@ terraform {
 
   # Replace the bucket name with the `state_bucket` output from resources/bootstrap/.
   backend "s3" {
-    bucket       = "flare-demo-state-REPLACE_WITH_ACCOUNT_ID"
+    bucket       = "flare-demo-state-732529885455"
     key          = "demo/terraform.tfstate"
     region       = "eu-central-1"
     use_lockfile = true
