@@ -2,8 +2,8 @@
 # or role you (and teammates) use at the hackathon. No write access to anything.
 
 resource "aws_iam_policy" "monitor_readonly" {
-  name        = "tfpulse-demo-monitor-readonly"
-  description = "Read Terraform state, CloudWatch metrics and logs for the tfpulse demo"
+  name        = "flare-demo-monitor-readonly"
+  description = "Read Terraform state, CloudWatch metrics and logs for the flare demo"
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -47,7 +47,7 @@ resource "aws_iam_policy" "monitor_readonly" {
 # Cost guardrail: email alert when forecasted monthly spend passes 80% of the budget.
 resource "aws_budgets_budget" "demo" {
   count        = var.alert_email == "" ? 0 : 1
-  name         = "tfpulse-demo-monthly"
+  name         = "flare-demo-monthly"
   budget_type  = "COST"
   limit_amount = tostring(var.monthly_budget_usd)
   limit_unit   = "USD"

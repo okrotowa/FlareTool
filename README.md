@@ -1,8 +1,11 @@
-# tfpulse demo stack
+# Flare demo stack
 
 Demo infrastructure for the hackathon: three Lambdas deployed with Terraform, state in a
 versioned S3 bucket, background traffic so CloudWatch always has data. This is the
-environment the tool monitors; the tool itself gets built at the event.
+environment Flare monitors; Flare itself gets built at the event.
+
+Every `terraform apply` writes a new version of the state object, so the bucket's version
+history doubles as the deploy history Flare reads.
 
 Layout:
 
@@ -31,8 +34,19 @@ terraform init
 terraform apply
 ```
 
-Then attach the `monitor_policy_arn` output to the IAM user or role you'll use at the
-hackathon, and confirm the budget-alert email AWS sends you.
+`terraform.tfvars` settings:
+
+| Variable             | Required | Default | Purpose                                              |
+| -------------------- | -------- | ------- | ---------------------------------------------------- |
+| `state_bucket`       | yes      | —       | Bootstrap output; scopes the read-only monitor policy |
+| `alert_email`        | no       | `""`    | Budget alert recipient; leave empty to skip the budget |
+| `monthly_budget_usd` | no       | `5`     | Monthly budget the alert is measured against          |
+
+Outputs:
+
+- `monitor_policy_arn` — read-only policy (state bucket, CloudWatch metrics and logs,
+  Lambda config) for Flare. Attach it to the IAM user or role you'll use at the hackathon.
+- `function_names` — the three deployed Lambda names.
 
 ## 3. Let it run
 
@@ -74,5 +88,5 @@ cd bootstrap && terraform destroy
 ## Expected cost
 
 Effectively $0 within Lambda's always-free allowance; well under $1/month even without
-it. The biggest risk is forgetting to tear down, so the budget alert emails you at 80% of
-$5 forecasted spend.
+it. The biggest risk is forgetting to tear down, so if `alert_email` is set the budget
+alert emails you when forecasted spend passes 80% of `monthly_budget_usd` ($5 by default).

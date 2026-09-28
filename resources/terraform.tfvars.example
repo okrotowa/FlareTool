@@ -1,2 +1,2 @@
-state_bucket = "tfpulse-demo-state-REPLACE_WITH_ACCOUNT_ID"
+state_bucket = "flare-demo-state-REPLACE_WITH_ACCOUNT_ID"
 alert_email  = "you@example.com"

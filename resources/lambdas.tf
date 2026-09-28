@@ -4,7 +4,7 @@
 #   checkout - takes 0.8-1.5 s; healthy with timeout = 10, red when broken to timeout = 1
 
 resource "aws_iam_role" "lambda_exec" {
-  name = "tfpulse-demo-lambda-exec"
+  name = "flare-demo-lambda-exec"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -29,12 +29,12 @@ data "archive_file" "catalog" {
 }
 
 resource "aws_cloudwatch_log_group" "catalog" {
-  name              = "/aws/lambda/tfpulse-demo-catalog"
+  name              = "/aws/lambda/flare-demo-catalog"
   retention_in_days = 3
 }
 
 resource "aws_lambda_function" "catalog" {
-  function_name    = "tfpulse-demo-catalog"
+  function_name    = "flare-demo-catalog"
   role             = aws_iam_role.lambda_exec.arn
   handler          = "catalog.handler"
   runtime          = "python3.12"
@@ -55,12 +55,12 @@ data "archive_file" "orders" {
 }
 
 resource "aws_cloudwatch_log_group" "orders" {
-  name              = "/aws/lambda/tfpulse-demo-orders"
+  name              = "/aws/lambda/flare-demo-orders"
   retention_in_days = 3
 }
 
 resource "aws_lambda_function" "orders" {
-  function_name    = "tfpulse-demo-orders"
+  function_name    = "flare-demo-orders"
   role             = aws_iam_role.lambda_exec.arn
   handler          = "orders.handler"
   runtime          = "python3.12"
@@ -81,12 +81,12 @@ data "archive_file" "checkout" {
 }
 
 resource "aws_cloudwatch_log_group" "checkout" {
-  name              = "/aws/lambda/tfpulse-demo-checkout"
+  name              = "/aws/lambda/flare-demo-checkout"
   retention_in_days = 3
 }
 
 resource "aws_lambda_function" "checkout" {
-  function_name    = "tfpulse-demo-checkout"
+  function_name    = "flare-demo-checkout"
   role             = aws_iam_role.lambda_exec.arn
   handler          = "checkout.handler"
   runtime          = "python3.12"

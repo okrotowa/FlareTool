@@ -2,7 +2,7 @@
 # Use project/traffic.py for bursts right before the demo.
 
 resource "aws_cloudwatch_event_rule" "traffic" {
-  name                = "tfpulse-demo-traffic"
+  name                = "flare-demo-traffic"
   schedule_expression = "rate(1 minute)"
 }
 

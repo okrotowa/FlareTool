@@ -19,14 +19,14 @@ variable "region" {
 provider "aws" {
   region = var.region
   default_tags {
-    tags = { Project = "tfpulse-demo" }
+    tags = { Project = "flare-demo" }
   }
 }
 
 data "aws_caller_identity" "current" {}
 
 resource "aws_s3_bucket" "state" {
-  bucket        = "tfpulse-demo-state-${data.aws_caller_identity.current.account_id}"
+  bucket        = "flare-demo-state-${data.aws_caller_identity.current.account_id}"
   force_destroy = true # lets `terraform destroy` clean up after the hackathon
 }
 

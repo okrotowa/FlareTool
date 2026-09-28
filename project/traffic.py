@@ -13,7 +13,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 import boto3
 
-FUNCTIONS = ["tfpulse-demo-catalog", "tfpulse-demo-orders", "tfpulse-demo-checkout"]
+FUNCTIONS = ["flare-demo-catalog", "flare-demo-orders", "flare-demo-checkout"]
 
 
 def invoke(client, name):
