@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "tfstate-health": {
+      "command": "/Users/olha/Repos/FlareTool/mcp/.venv/bin/tfstate-health",
+      "env": {
+        "STATE_BUCKET": "flare-demo-state-732529885455",
+        "STATE_KEY": "demo/terraform.tfstate",
+        "AWS_REGION": "eu-central-1"
+      }
+    }
+  }
+}

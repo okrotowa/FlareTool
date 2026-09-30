@@ -24,19 +24,13 @@ Each record is `address`, `type`, `module`, `id`, `arn`. Full attribute dumps ar
 
 ## Cursor `mcp.json`
 
-S3, using the backend in `resources/versions.tf`. No `AWS_PROFILE`: boto3 uses the same default credential chain as the AWS CLI and other AWS tools in this environment.
+Project config lives in `.cursor/mcp.json`. It launches the virtualenv entry point created by the install below. No `AWS_PROFILE`: boto3 uses the same default credential chain as the AWS CLI (`~/.aws/credentials`).
 
 ```json
 {
   "mcpServers": {
     "tfstate-health": {
-      "command": "uv",
-      "args": [
-        "run",
-        "--directory",
-        "/absolute/path/to/FlareTool/mcp",
-        "tfstate-health"
-      ],
+      "command": "/absolute/path/to/FlareTool/mcp/.venv/bin/tfstate-health",
       "env": {
         "STATE_BUCKET": "flare-demo-state-732529885455",
         "STATE_KEY": "demo/terraform.tfstate",
@@ -55,13 +49,7 @@ Local fixture, no AWS calls:
 {
   "mcpServers": {
     "tfstate-health": {
-      "command": "uv",
-      "args": [
-        "run",
-        "--directory",
-        "/absolute/path/to/FlareTool/mcp",
-        "tfstate-health"
-      ],
+      "command": "/absolute/path/to/FlareTool/mcp/.venv/bin/tfstate-health",
       "env": {
         "STATE_FILE": "/absolute/path/to/FlareTool/mcp/tests/fixtures/sample.tfstate.json"
       }
