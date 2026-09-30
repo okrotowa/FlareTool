@@ -1,6 +1,9 @@
 .terraform/
 *.tfstate
 *.tfstate.backup
+*tfplan*
+resources/bootstrap/state.txt
 resources/build/
 terraform.tfvars
 __pycache__/
+.DS_Store

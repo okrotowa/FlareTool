@@ -7,6 +7,14 @@
         "STATE_KEY": "demo/terraform.tfstate",
         "AWS_REGION": "eu-central-1"
       }
+    },
+    "awslabs-cloudwatch": {
+      "command": "/Users/olha/.local/bin/uvx",
+      "args": ["awslabs.cloudwatch-mcp-server@latest"],
+      "env": {
+        "AWS_REGION": "eu-central-1",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
     }
   }
 }
