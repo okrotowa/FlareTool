@@ -154,7 +154,11 @@ def test_server_registers_the_tool_and_reads_the_fixture(monkeypatch: pytest.Mon
     from tfstate_health.server import list_stack_resources, mcp
 
     tools = asyncio.run(mcp.list_tools())
-    assert [tool.name for tool in tools] == ["list_stack_resources"]
+    assert [tool.name for tool in tools] == [
+        "list_stack_resources",
+        "last_apply_info",
+        "get_stack_health",
+    ]
     rows = list_stack_resources("demo")
     assert len(rows) == 7
     assert rows[1]["address"] == "aws_lambda_function.checkout"

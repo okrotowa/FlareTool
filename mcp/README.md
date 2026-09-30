@@ -1,14 +1,20 @@
 # tfstate-health
 
 Read-only MCP server. Terraform state decides which resources belong to the stack.
-This step exposes one tool, `list_stack_resources`.
 
 Built on the MCP Python SDK. SDK 2 renamed `FastMCP` to `MCPServer`; the `@mcp.tool()` style is the same.
 
-## Tool
+## Tools
 
 `list_stack_resources(env)` returns managed resources only (data sources are skipped).
 Each record is `address`, `type`, `module`, `id`, `arn`. Full attribute dumps are not returned.
+
+`last_apply_info(env)` returns `last_modified`, `serial`, `lineage`, and `minutes_since_last_apply`.
+
+`get_stack_health(env, since_minutes=60)` returns one report for the whole stack, grouped by module.
+Each resource is `ok`, `warn`, `error`, or `unknown` with a one-line reason. `unknown` means there is
+no checker for that type, or that resource's AWS call failed. Lambda, EC2, RDS, and S3 are checked.
+A CloudWatch alarm in ALARM whose dimension matches a resource id or ARN marks that resource `error`.
 
 ## Config
 
