@@ -94,6 +94,6 @@ resource "aws_lambda_function" "checkout" {
   filename         = data.archive_file.checkout.output_path
   source_code_hash = data.archive_file.checkout.output_base64sha256
   memory_size      = 128
-  timeout          = 10
+  timeout          = 1
   depends_on       = [aws_cloudwatch_log_group.checkout, aws_iam_role_policy_attachment.lambda_logs]
 }

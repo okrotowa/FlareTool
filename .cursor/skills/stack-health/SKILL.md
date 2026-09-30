@@ -25,15 +25,23 @@ Use the `tfstate-health` MCP tools. Pass `env` as `demo` unless the user names a
 
 ## Report
 
-Use this shape every time:
+The report is a canvas, not a markdown table in chat. Read the canvas skill and follow it, including its file location, imports, and design rules. Write `{env}-stack-health.canvas.tsx`. Embed the data inline.
 
-1. One-line verdict: 🔴 if any `error`, otherwise 🟡 if any `warn`, otherwise 🟢.
-2. A table grouped by module: address and status. Put the root module first.
-3. Details for `warn` and `error` resources only: the one-line reason, plus the log or alarm finding.
-4. One suggested next step. On a green report, the next step is none.
+The chat reply is one sentence: the verdict, then a markdown link to that canvas. Do not paste the resource table in chat.
 
-On a green report, stop after the verdict and the table.
+Verdict tone: `danger` if any `error`, otherwise `warning` if any `warn`, otherwise `success`. No emoji.
+
+Layout, top to bottom:
+
+1. Title and a caption: environment, snapshot time, CloudWatch window, `last_modified`, and serial.
+2. One callout in the verdict tone. Name each `warn` and `error` resource, the reason, and the log or alarm finding. Say when it started after `last_modified`. On a green report the callout is the verdict only.
+3. Counts for error, ok, warn, and unknown, and a usage bar of those counts. Caption the source and window. Omit a count that is zero.
+4. One card per `warn` or `error` resource, with the finding and a short timeline against `last_modified`. One next step, on the first of those cards. Green reports omit the cards and the next step.
+5. When any resource is `unknown`, a short note and a table grouped by type (type, count, role). Unknown means no checker for that type, or that one AWS call failed. Checked types are Lambda (Errors and Throttles), EC2 (state and status checks), RDS (status and CPU), and S3 (exists and public access block). A CloudWatch alarm in ALARM also marks any resource `error` when a dimension matches its id or ARN. Omit this section when every resource was checked.
+6. A resource table with filters Checked, Unknown, and All. Default to Checked when any resource is unknown. Sort `error`, then `warn`, then `ok`, then `unknown`. Row tones: `danger`, `warning`, `success`, `neutral`.
+
+On a green report, still write the canvas, and stop after the counts and the table. Do not call CloudWatch.
 
 ## Loop
 
-When this run comes from `/loop`, compare with the previous report in the conversation. Report only resources whose status or reason changed. If nothing changed, reply with one line and stop.
+When this run comes from `/loop`, compare with the previous report in the conversation. If nothing changed, reply with one line and do not rewrite the canvas. If something changed, update the canvas and mention only the resources whose status or reason changed.
